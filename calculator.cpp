@@ -2,18 +2,24 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+//#include <ctime>
 //#include <cstring>
 //#include <sstream>
 
 double evaluateEqu(std::string equ);
 std::string findOperands(std::string equ, int index);
+std::string findParen(std::string equ, int index);
 double calculate(std::string leftNum, std::string rightNum, char operand);
 
 // Given any math equation as a string without exponents or parenthesis
 // this function can calculate the value and return it as a double.
 int main()
 {
-    double total = evaluateEqu("6+7/10*25+100-20/10");
+    //double start = std::clock();
+    double total = evaluateEqu("6+7/10*25+100-20/10+20-50-60+12/43*12/60-90+60*40+12-21+40/50");
+    //double duration = (std::clock() - start) / (double) CLOCKS_PER_SEC;
+
+    //std::cout<<"Duration = "<<duration<<"\n";
 
     std::cout<<"The total is: "<<total<<"\n";
 
@@ -42,7 +48,7 @@ double evaluateEqu(std::string equ)
 
         if (foundParen != std::string::npos)
         {
-            equ = findOperands(equ, foundParen);
+            equ = findParen(equ, foundParen);
             //std::cout<<"equ = "<<equ<<"\n\n";
         }
         else if (foundExp != std::string::npos)
@@ -118,6 +124,12 @@ std::string findOperands(std::string equ, int index)
     // Replace the parts of the equation with the number we just calculated.
     // i + 1 and j - 2 because of inclusion rules and where values end.
     return equ.replace(i + 1, j - 2, result);
+}
+
+// Finds the parenthesis in the equation and figures out which 
+std::string findParen(std::string equ, int index)
+{
+    return "";
 }
 
 // Calculates the value of the operands with the given operator and returns the result.
